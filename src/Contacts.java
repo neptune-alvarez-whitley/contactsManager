@@ -1,3 +1,6 @@
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
 import java.io.IOException;
 import java.nio.file.*;
 import java.util.ArrayList;
@@ -72,6 +75,12 @@ public class Contacts{
 //        benny.readFileAndOutput(contactFile);
 
         ArrayList<String> contact = new ArrayList<>();
+        try {
+            BufferedReader reader = new BufferedReader(new FileReader(new File(String.valueOf(contactFile))));
+        } catch (IOException ioe) {
+            ioe.printStackTrace();
+        }
+
 //        contact.add("Naysa, 1234567890");
 //        contact.add("Benny, 2106307421");
 //        contact.add("Austin, 8178465508");
@@ -79,7 +88,28 @@ public class Contacts{
         //call the write method to add information to the contacts list
 //        benny.write(contactFile, contact, StandardOpenOption.APPEND);
 
-        benny.readFileAndOutput(contactFile);
+//        benny.readFileAndOutput(contactFile);
+
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Welcome to your Contacts Menu.");
+        System.out.println("1. View contacts");
+        System.out.println("2. Add a new contact.");
+        System.out.println("3. Search a contact by name.");
+        System.out.println("4. Delete an existing contact.");
+        System.out.println("5. Exit.");
+        System.out.print("Enter a number: ");
+        int userInput = scanner.nextInt();
+        if(userInput == 1) {
+            benny.readFileAndOutput(contactFile);
+        } else if (userInput == 2) {
+            String addContact = scanner.nextLine();
+        } else if (userInput == 3) {
+
+        } else if (userInput == 4) {
+
+        } else if (userInput == 5) {
+            System.out.println("Thank you, goodbye!");
+        }
 
 
     }
