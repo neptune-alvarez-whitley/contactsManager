@@ -125,12 +125,18 @@ public class Contacts{
             if (userInput == 1) {
                 benny.readFileAndOutput(contactFile);
             } else if (userInput == 2) {
-                System.out.println("Enter the contact information:");
-                System.out.println("Name, phoneNumber");
-                System.out.print(":");
+                System.out.print("\nFirst name: ");
+                String firstName = scanner.nextLine();
+                firstName = scanner.nextLine();
 
-                addContact = scanner.nextLine();
-                addContact = scanner.nextLine();
+                System.out.print("\nLast name: ");
+                String lastName = scanner.nextLine();
+
+                System.out.print("\nPhone number: ");
+                String phoneNumber = scanner.nextLine();
+
+                addContact = firstName + " " + lastName + ", " + phoneNumber;
+
                 contact.add(addContact);
 
 //                benny.write(contactFile, contact, StandardOpenOption.APPEND);
