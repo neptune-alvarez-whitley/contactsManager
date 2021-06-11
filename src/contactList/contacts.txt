@@ -8,3 +8,5 @@ jewl, 8765432190
 Timmy  Duncan, 2101112222
 lebron james, 9991234567
 john lewis, 1112223333
+Irvin Buendia, 2101112233
+David Culver, (123)-123-4567

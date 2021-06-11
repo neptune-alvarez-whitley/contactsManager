@@ -184,7 +184,10 @@ public class Contacts{
                 System.out.print("\nPhone number: ");
                 String phoneNumber = scanner.nextLine();
 
-                String[] formatNumber = phoneNumber.split("");
+
+               phoneNumber = phoneNumber.replaceFirst("(\\d{3})(\\d{3})(\\d+)", "($1)-$2-$3");
+
+
 
 
                 addContact = firstName + " " + lastName + ", " + phoneNumber;
