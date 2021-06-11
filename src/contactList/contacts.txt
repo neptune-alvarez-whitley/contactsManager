@@ -6,3 +6,6 @@ bianca, 3214567890
 yosef, 5432167890
 holly, 7654321890
 jewl, 8765432190
+Timmy  Duncan, 2101112222
+lebron james, 9991234567
+john lewis, 1112223333

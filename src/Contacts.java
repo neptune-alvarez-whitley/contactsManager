@@ -93,6 +93,19 @@ public class Contacts{
         }
     }
 
+
+    //for #3 search contact.
+    public void searchFile(Path pathToFile, String searchContact) throws IOException{
+        Scanner scan = new Scanner(pathToFile);
+        System.out.println(scan);
+        while(scan.hasNext()){
+            String line = scan.nextLine().toLowerCase();
+            if(line.contains(searchContact)){
+                System.out.println(line);
+            }
+        }
+    }
+
     public static void main(String[] args) {
 
         Contacts benny = new Contacts();
@@ -146,6 +159,16 @@ public class Contacts{
                 contact.clear();
 
             } else if (userInput == 3) {
+                System.out.println("Enter the name of the contact you would like to search.");
+                Scanner search = new Scanner(System.in);
+                String searchContact = search.nextLine();
+
+                try {
+                    benny.searchFile(contactFile, searchContact);
+                } catch (IOException ioException) {
+                    System.out.println("Error at #3 section");
+                    ioException.printStackTrace();
+                }
 
             } else if (userInput == 4) {
 
