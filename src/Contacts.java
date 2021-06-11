@@ -9,6 +9,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Scanner;
 
+
 public class Contacts{
 
     public void addNewContact(Path location, ArrayList<String> contactList, String userContact){
@@ -93,6 +94,18 @@ public class Contacts{
         }
     }
 
+
+    //for #3 search contact.
+//    public void searchFile(Path pathToFile, String searchContact) throws IOException{
+//        Scanner scan = new Scanner(pathToFile);
+//        while(scan.hasNext()){
+//            String line = scan.nextLine().toLowerCase().toString();
+//            if(line.contains(searchContact)){
+//                System.out.println(line);
+//            }
+//        }
+//    }
+
     public static void main(String[] args) {
 
         Contacts benny = new Contacts();
@@ -140,6 +153,10 @@ public class Contacts{
                 contact.clear();
 
             } else if (userInput == 3) {
+                System.out.println("Enter the name of the contact you would like to search.");
+                Scanner search = new Scanner(System.in);
+                String searchContact = search.nextLine();
+//                contact.searchFile(userInput, searchContact);
 
             } else if (userInput == 4) {
 
