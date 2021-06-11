@@ -62,12 +62,19 @@ public class Contacts{
         //we can use the readAllLines() method to get every line of information from the txt file
         //Now we will use a for loop(enhanced) to print out our array list to the console
         String format = "|| %1$-15s| %2$-16s||\n";
+        System.out.println("||==================================||");
+        System.out.format(format, "Name ", " Phone Number ");
+        System.out.println("||----------------------------------||");
         String[] information;
         for(String line: currentList){
             information = line.split(",");
-            System.out.format(format, information[0], information[1]);
+            try {
+                System.out.format(format, information[0], information[1]);
+            } catch(ArrayIndexOutOfBoundsException aio){
 
+            }
         }
+        System.out.println("||==================================||");
     }
 
     public void createContactStorage(){
@@ -111,14 +118,14 @@ public class Contacts{
         System.out.println("===============================");
         System.out.print("\nFirst name: ");
         String firstName = sc.nextLine();
-        firstName = sc.nextLine();
+
 
         System.out.print("\nLast name: ");
         String lastName = sc.nextLine();
 
         System.out.print("\nPhone number: ");
         String phoneNumber = sc.nextLine();
-        System.out.println("===============================");
+        System.out.println("\n===============================");
         String[] numberTest = phoneNumber.split("");
         //format phone numbers based on length
         if(numberTest.length == 10) {
@@ -127,7 +134,7 @@ public class Contacts{
             phoneNumber = phoneNumber.replaceFirst("(\\d{3})(\\d+)", "$1-$2");
         }
         else{
-            System.out.println("\nThat number is not the right length");
+            System.out.println("That number is not the right length");
             System.out.println("Please enter your contact information again:");
 
             return addContact(sc);
@@ -184,9 +191,9 @@ public class Contacts{
         ArrayList<String> contact = new ArrayList<>();
 
         Scanner scanner = new Scanner(System.in);
-        int userInput = 0;
+        String userInput = "";
         String addContact = "";
-        while(userInput != 5) {
+        while(!userInput.equals("5") ) {
 
             System.out.println("Welcome to your Contacts Menu.");
             System.out.println("1. View contacts");
@@ -196,11 +203,11 @@ public class Contacts{
             System.out.println("5. Exit.");
             System.out.print("Enter a number: ");
 
-            userInput = scanner.nextInt();
+            userInput = scanner.nextLine();
 
-            if (userInput == 1) {
+            if (userInput.equals("1")) {
                 benny.readFileAndOutput(contactFile);
-            } else if (userInput == 2) {
+            } else if (userInput.equals("2")) {
                 //call to add number method
                 addContact = benny.addContact(scanner);
                 contact.add(addContact);
@@ -208,7 +215,7 @@ public class Contacts{
                 benny.addNewContact(contactFile, contact, addContact);
                 contact.clear();
 
-            } else if (userInput == 3) {
+            } else if (userInput.equals("3")) {
                 System.out.println("Enter the name of the contact you would like to search.");
                 Scanner search = new Scanner(System.in);
                 String searchContact = search.nextLine();
@@ -219,7 +226,7 @@ public class Contacts{
                     System.out.println("Error at #3 section");
                     ioException.printStackTrace();
                 }
-            } else if (userInput == 4) {
+            } else if (userInput.equals("4")) {
                 System.out.println("Enter the name of the contact you would like to delete.");
                 Scanner search = new Scanner(System.in);
                 String searchContact = search.nextLine();
@@ -230,8 +237,10 @@ public class Contacts{
                     ioException.printStackTrace();
                 }
 
-            } else if (userInput == 5) {
+            } else if (userInput.equals("5")) {
                 System.out.println("Thank you, goodbye!");
+            } else {
+                System.out.println("Sorry please try again.");
             }
         }
     }
