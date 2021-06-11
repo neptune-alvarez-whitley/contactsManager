@@ -4,10 +4,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.lang.reflect.Array;
 import java.nio.file.*;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 
 public class Contacts{
 
@@ -59,11 +56,17 @@ public class Contacts{
             currentList = Files.readAllLines(pathToFile);
         }catch(IOException ioe){
             ioe.printStackTrace();
+        }catch(Exception e){
+            System.out.println("Your contacts list is empty");
         }
         //we can use the readAllLines() method to get every line of information from the txt file
         //Now we will use a for loop(enhanced) to print out our array list to the console
+        String format = "|| %1$-15s| %2$-16s||\n";
+        String[] information;
         for(String line: currentList){
-            System.out.println(line);
+            information = line.split(",");
+            System.out.format(format, information[0], information[1]);
+
         }
     }
 
@@ -92,15 +95,44 @@ public class Contacts{
             ioe.printStackTrace();
         }
     }
+
     //for #3 search contact.
     public void searchFile(Path pathToFile, String searchContact) throws IOException{
         Scanner scan = new Scanner(pathToFile);
         while(scan.hasNext()){
             String line = scan.nextLine().toLowerCase();
-            if(line.contains(searchContact)){
+            if(line.contains(searchContact.toLowerCase(Locale.ROOT))){
                 System.out.println(line);
             }
         }
+    }
+
+    public String addContact(Scanner sc){
+        System.out.println("===============================");
+        System.out.print("\nFirst name: ");
+        String firstName = sc.nextLine();
+        firstName = sc.nextLine();
+
+        System.out.print("\nLast name: ");
+        String lastName = sc.nextLine();
+
+        System.out.print("\nPhone number: ");
+        String phoneNumber = sc.nextLine();
+        System.out.println("===============================");
+        String[] numberTest = phoneNumber.split("");
+        //format phone numbers based on length
+        if(numberTest.length == 10) {
+            phoneNumber = phoneNumber.replaceFirst("(\\d{3})(\\d{3})(\\d+)", "($1)$2-$3");
+        }else if(numberTest.length == 7){
+            phoneNumber = phoneNumber.replaceFirst("(\\d{3})(\\d+)", "$1-$2");
+        }
+        else{
+            System.out.println("\nThat number is not the right length");
+            System.out.println("Please enter your contact information again:");
+
+            return addContact(sc);
+        }
+        return firstName + " " + lastName + ", " + phoneNumber;
     }
 
     public void deleteContact(Path pathToFile, String searchContact) throws IOException{
@@ -148,13 +180,8 @@ public class Contacts{
         benny.createContactStorage();
 
         Path contactFile = Paths.get("src/contactList", "contacts.txt");
-//        benny.readFileAndOutput(contactFile);
 
         ArrayList<String> contact = new ArrayList<>();
-        //call the write method to add information to the contacts list
-//        benny.write(contactFile, contact, StandardOpenOption.APPEND);
-
-//        benny.readFileAndOutput(contactFile);
 
         Scanner scanner = new Scanner(System.in);
         int userInput = 0;
@@ -174,28 +201,9 @@ public class Contacts{
             if (userInput == 1) {
                 benny.readFileAndOutput(contactFile);
             } else if (userInput == 2) {
-                System.out.print("\nFirst name: ");
-                String firstName = scanner.nextLine();
-                firstName = scanner.nextLine();
-
-                System.out.print("\nLast name: ");
-                String lastName = scanner.nextLine();
-
-                System.out.print("\nPhone number: ");
-                String phoneNumber = scanner.nextLine();
-
-
-               phoneNumber = phoneNumber.replaceFirst("(\\d{3})(\\d{3})(\\d+)", "($1)-$2-$3");
-
-
-
-
-                addContact = firstName + " " + lastName + ", " + phoneNumber;
-
+                //call to add number method
+                addContact = benny.addContact(scanner);
                 contact.add(addContact);
-
-//                benny.write(contactFile, contact, StandardOpenOption.APPEND);
-//                contact.clear();
 
                 benny.addNewContact(contactFile, contact, addContact);
                 contact.clear();
